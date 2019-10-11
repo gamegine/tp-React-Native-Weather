@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Weather from '../service/Weather';
 
+import Loading from '../component/Loading';
+
 export default class Home extends React.Component {
 
   service = new Weather();
@@ -41,9 +43,7 @@ export default class Home extends React.Component {
             </View>
         </View>
     :
-      <View style={styles.container}>
-        <Text>Loading ...</Text>
-      </View>
+      <Loading/>
     );
   }
 };
