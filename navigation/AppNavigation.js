@@ -1,10 +1,10 @@
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 
 import HomeScreen from '../page/Home';
 import About from '../page/About';
 
-const AppNavigation = createStackNavigator({
+const AppNavigation = createBottomTabNavigator({
   Home: {
     screen: HomeScreen
   },
