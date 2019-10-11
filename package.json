@@ -1,0 +1,38 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "expo": "^35.0.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-web": "^0.11.7"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^7.0.0"
+  },
+  "private": true,
+  "name": "react-native-weather",
+  "description": "react-native-weather",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gamegine/React-Native-Weather.git"
+  },
+  "keywords": [
+    "react-native",
+    "weather"
+  ],
+  "author": "gamegine",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/gamegine/React-Native-Weather/issues"
+  },
+  "homepage": "https://github.com/gamegine/React-Native-Weather#readme"
+}
