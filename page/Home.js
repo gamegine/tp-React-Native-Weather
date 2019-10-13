@@ -9,9 +9,9 @@ export default class Home extends React.Component {
 
   service = new Weather();
   state = { data:null };
-
+  
   componentDidMount(){
-    this.setState({data:this.service.getWeatherHome()})
+    this.service.getWeatherHome().then((response)=>this.setState({data:response.data}))
   }
 
   render()
@@ -22,23 +22,23 @@ export default class Home extends React.Component {
             <Text>Hi !</Text>
             <View>
                 <View>
-                    <Text>{this.state.data.weather.main}</Text>
-                    <Text>{this.state.data.weather.description}</Text>
+                    <Text>main: {this.state.data.weather[0].main}</Text>
+                    <Text>description: {this.state.data.weather[0].description}</Text>
                 </View>
                 <View>
-                    <Text>{this.state.data.sys.sunrise}</Text>
-                    <Text>{this.state.data.sys.sunset}</Text>
+                    <Text>sunrise: {this.state.data.sys.sunrise}</Text>
+                    <Text>sunset: {this.state.data.sys.sunset}</Text>
                 </View>
                 <View>
-                    <Text>{this.state.data.main.temps_min}</Text>
-                    <Text>{this.state.data.main.temps}</Text>
-                    <Text>{this.state.data.main.temps_max}</Text>
+                    <Text>temp_min: {this.state.data.main.temp_min}</Text>
+                    <Text>temp: {this.state.data.main.temp}</Text>
+                    <Text>temp_max: {this.state.data.main.temp_max}</Text>
 
-                    <Text>{this.state.data.main.humidity}</Text>
-                    <Text>{this.state.data.main.pressure}</Text>
+                    <Text>humidity: {this.state.data.main.humidity}</Text>
+                    <Text>pressure: {this.state.data.main.pressure}</Text>
                 </View>
                 <View>
-                    <Text>{this.state.data.wind.speed}</Text>
+                    <Text>wind speed: {this.state.data.wind.speed}</Text>
                 </View>
             </View>
         </View>

@@ -1,24 +1,10 @@
+import Axios from 'axios';
+
+const token = `b6907d289e10d714a6e88b30761fae22`
+const url = `https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=${token}`
+
 export default class Weather{
     getWeatherHome(){
-        return {
-            weather:{
-                main:'Beau Temps',
-                description:`Il fait beau aujourd'hui`
-            },
-            main:{
-                temps:'13',
-                temps_min:'13',
-                temps_max:'21',
-                humidity:'92',
-                pressure:'1009'
-            },
-            wind:{
-                speed:'10'
-            },
-            sys:{
-                sunrise: 1560281377,
-                sunset: 1560333478
-            }
-        }
+        return Axios.get(url)
     }
 }
