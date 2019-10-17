@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class About extends React.Component {
-  render()
-  {
+  render() {
     return (
       <View style={styles.container}>
-        <Text>About</Text>
+        <Icon.Button name="logo-github" backgroundColor="#24292e">
+          <Text style={{ fontSize: 15 }}>Github </Text>
+        </Icon.Button>
       </View>
     );
   }
