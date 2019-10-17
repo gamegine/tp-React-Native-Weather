@@ -1,16 +1,25 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import Icon from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from '../page/Home';
-import About from '../page/About';
+import ScreenHome from '../page/Home';
+import ScreenAbout from '../page/About';
 
-const AppNavigation = createBottomTabNavigator({
+const AppNavigation = createMaterialBottomTabNavigator({
   Home: {
-    screen: HomeScreen
+    screen: ScreenHome,
+    navigationOptions:{
+      tabBarIcon: ({tintColor})=>(<Icon style={tintColor} size={25} name={'ios-home'}></Icon>)
+    }
   },
   About: {
-    screen: About
+    screen: ScreenAbout,
+    navigationOptions:{
+      tabBarIcon: ({tintColor})=>(<Icon style={tintColor} size={25} name={'md-information-circle-outline'}></Icon>)
+    }
   }
 });
 
 export default createAppContainer(AppNavigation);
+
