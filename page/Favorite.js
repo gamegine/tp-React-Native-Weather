@@ -7,7 +7,7 @@ export default class Favorite extends React.Component {
     return {
       title: 'Favorite',
       headerRight: (
-        <Icon.Button name="ios-add" onPress={() => navigation.push('AddFavorite')}/>
+        <Icon name="ios-add" size={25} style={{marginRight:20}} onPress={() => navigation.push('AddFavorite')}/>
       )
     }
   };
