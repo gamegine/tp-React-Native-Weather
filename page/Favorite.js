@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, AsyncStorage } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Favorite extends React.Component {
@@ -15,19 +16,20 @@ export default class Favorite extends React.Component {
   state = { city: [] };
   refreshData() {
     console.log('add fav', this.state.input);
-    AsyncStorage.getItem('city').then(data=>{
-      console.log('current fav :',data)
-      this.setState({city:JSON.parse(data)})
+    AsyncStorage.getItem('city').then(data => {
+      console.log('current fav :', data)
+      this.setState({ city: JSON.parse(data) })
     })
   }
 
-  componentDidMount(){this.refreshData()}
+  componentDidMount() { this.refreshData() }
 
   render() {
     return (
       <View style={styles.container}>
+        <NavigationEvents onDidFocus={payload => this.refreshData()} />
         {this.state.city.length != 0 ? (
-          <FlatList data={this.state.city} renderItem={({ item }) => ( <Item title={item}/> )}/>
+          <FlatList data={this.state.city} renderItem={({ item }) => (<Item title={item} />)} />
         ) : (
             <Text>no favorites</Text>
           )}
