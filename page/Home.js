@@ -20,17 +20,17 @@ export default class Home extends React.Component {
       this.state.data != null ?
         <View style={styles.container}>
           <Text>{this.state.data.name}</Text>
-          <Text>main: {this.state.data.weather[0].main}</Text>
-          <Text>description: {this.state.data.weather[0].description}</Text>
+          <Text>{this.state.data.weather[0].main}</Text>
+          <Text>{this.state.data.weather[0].description}</Text>
           <View style={{ flexDirection: 'row', margin: 10, }}>
             <View style={{ margin: 10 }}>
               <Text style={{ textAlign: 'center' }}>sunrise</Text>
-              <Text style={{ textAlign: 'center' }}>{this.state.data.sys.sunrise}</Text>
+              <Text style={{ textAlign: 'center' }}>{new Date(this.state.data.sys.sunrise*1000).toLocaleTimeString()}</Text>
             </View>
             <Icon style={{ margin: 10 }} size={30} name={'ios-sunny'}></Icon>
             <View style={{ margin: 10 }}>
               <Text style={{ textAlign: 'center' }}>sunset</Text>
-              <Text style={{ textAlign: 'center' }}>{this.state.data.sys.sunset}</Text>
+              <Text style={{ textAlign: 'center' }}>{new Date(this.state.data.sys.sunset*1000).toLocaleTimeString()}</Text>
             </View>
           </View>
           <View style={{ flexDirection: 'row' }}>
