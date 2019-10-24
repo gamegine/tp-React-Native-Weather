@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, TextInput, View, Button, AsyncStorage } from 'react-native';
 
+import Weather from '../service/Weather';
+
 export default class Favorite extends React.Component {
   state = { input: '' }
 
@@ -19,16 +21,20 @@ export default class Favorite extends React.Component {
     this.setState({ input: text })
   }
   onAdd() {
-    AsyncStorage.getItem('city').then(data => {
-      console.log('add fav, current fav\n', data, '\nnew el', this.state.input)
-      city = []
-      if (data != null) { city = JSON.parse(data) }
-      if (this.chk(city, this.state.input)) { console.log('el is already present') }
-      else {
-        city.push(this.state.input);
-        AsyncStorage.setItem('city', JSON.stringify(city)).then(() => { this.props.navigation.goBack() })
-      }
-    })
+
+    if (this.state.input != "") {
+      new Weather().getWeather(this.state.input).then(() =>
+        AsyncStorage.getItem('city').then(data => {
+          console.log('add fav, current fav\n', data, '\nnew el', this.state.input)
+          city = []
+          if (data != null) { city = JSON.parse(data) }
+          if (this.chk(city, this.state.input)) { console.log('el is already present') }
+          else {
+            city.push(this.state.input);
+            AsyncStorage.setItem('city', JSON.stringify(city)).then(() => { this.props.navigation.goBack() })
+          }
+        })).catch((e)=>{console.log(e.response.data.message),alert(e.response.data.message)})
+    }
   }
 
   chk(json, key) {
