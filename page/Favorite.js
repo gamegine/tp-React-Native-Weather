@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Favorite extends React.Component {
@@ -13,6 +13,15 @@ export default class Favorite extends React.Component {
   };
 
   state = { city: [] };
+  refreshData() {
+    console.log('add fav', this.state.input);
+    AsyncStorage.getItem('city').then(data=>{
+      console.log('current fav :',data)
+      this.setState({city:JSON.parse(data)})
+    })
+  }
+
+  componentDidMount(){this.refreshData()}
 
   render() {
     return (
