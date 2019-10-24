@@ -19,15 +19,22 @@ export default class Favorite extends React.Component {
     this.setState({ input: text })
   }
   onAdd() {
-    console.log('add fav', this.state.input);
-    AsyncStorage.getItem('city').then(data=>{
-      console.log('current fav :',data)
+    AsyncStorage.getItem('city').then(data => {
+      console.log('add fav, current fav\n', data, '\nnew el', this.state.input)
       city = []
-      if(data!=null){city=JSON.parse(data)}
-      city.push(this.state.input);
-      console.log('new fav',city)
-      AsyncStorage.setItem('city', JSON.stringify(city)).then(()=>{this.props.navigation.goBack()})
+      if (data != null) { city = JSON.parse(data) }
+      if (!this.chk(city, this.state.input)) { console.log('el is already present') }
+      else {
+        city.push(this.state.input);
+        AsyncStorage.setItem('city', JSON.stringify(city)).then(() => { this.props.navigation.goBack() })
+      }
     })
+  }
+
+  chk(json, key) {
+    i = false
+    json.forEach(element => { if (element == key) { i = true } });
+    return false
   }
 };
 
@@ -38,6 +45,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignItems: 'stretch',
-    padding:5
+    padding: 5
   },
 });
