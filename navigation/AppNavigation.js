@@ -8,6 +8,7 @@ import ScreenHome from '../page/Home';
 import ScreenAbout from '../page/About';
 import ScreenFavorite from '../page/Favorite';
 import ScreenAddFavorite from '../page/AddFavorite';
+import ScreenDetailFavorite from '../page/DetailFavorite'
 
 
 const FavoriteNavigation = createStackNavigator({
@@ -16,6 +17,9 @@ const FavoriteNavigation = createStackNavigator({
   },
   AddFavorite: {
     screen: ScreenAddFavorite
+  },
+  DetailFavorite: {
+    screen: ScreenDetailFavorite
   }
 });
 

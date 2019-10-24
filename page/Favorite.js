@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, AsyncStorage } from 'react-native';
+import { Text, View, FlatList, AsyncStorage } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swipeout from 'react-native-swipeout';
@@ -52,8 +52,9 @@ export default class Favorite extends React.Component {
   }
   Item(title) {
     return (
-      <Swipeout right={[{ text: 'Remove', onPress: () => { this.onRemove(title) } }]}>
+      <Swipeout right={[{ text: 'Remove', backgroundColor:'red', onPress: () => { this.onRemove(title) } }]}>
         <Text>{title}</Text>
+        <Icon name="ios-add" size={25} style={{ marginRight: 20 }} onPress={() => this.props.navigation.push('DetailFavorite',{"city":title})} />
       </Swipeout>
     );
   }
