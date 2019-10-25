@@ -28,19 +28,13 @@ export default class Favorite extends React.Component {
           console.log('add fav, current fav\n', data, '\nnew el', this.state.input)
           city = []
           if (data != null) { city = JSON.parse(data) }
-          if (this.inJson(city, this.state.input)) { alert('city is already present') }
+          if (city.findIndex(item => item == this.state.input) !== -1) { alert('city is already present') }
           else {
             city.push(this.state.input);
             AsyncStorage.setItem('city', JSON.stringify(city)).then(() => { this.props.navigation.goBack() })
           }
-        })).catch((e)=>{console.log(e.response.data.message),alert(e.response.data.message)})
+        })).catch((e) => { console.log(e.response.data.message), alert(e.response.data.message) })
     }
-  }
-
-  inJson(json, key) {
-    i = false
-    json.forEach(element => { if (element == key) { i= true;console.log('true') } });
-    return i
   }
 };
 
