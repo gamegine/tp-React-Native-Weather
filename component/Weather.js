@@ -1,19 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import Loading from '../component/Loading';
+import { connect } from 'react-redux';
 import Weather from '../service/Weather';
 
-import Loading from '../component/Loading';
 
-export default class WeatherComp extends React.Component {
-
-  service = new Weather();
-  state = { data: null };
-
-  componentDidMount() {
-    this.service.getWeather(this.props.city).then((response) => this.setState({ data: response.data }))
+const mapStateToProps = (state) => (state)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: (action) => { dispatch(action) }
   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(class WeatherComp extends React.Component {
+  state = { data: null };
+  componentDidMount() {
+    if(this.props.WeatherService == null){ this.props.dispatch({ type: "ADD_WeatherService", value: new Weather() }) }
+    else { this.props.WeatherService.getWeather(this.props.city).then((response) => this.setState({ data: response.data })) }
+  }
+
+  componentDidUpdate()
+  { if(this.state.data==null){this.props.WeatherService.getWeather(this.props.city).then((response) => this.setState({ data: response.data })) }}
 
   render() {
     return (
@@ -50,7 +58,7 @@ export default class WeatherComp extends React.Component {
         <Loading />
     );
   }
-};
+})
 
 const styles = StyleSheet.create({
   container: {

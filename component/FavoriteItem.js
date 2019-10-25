@@ -3,22 +3,32 @@ import { Text, View, TouchableHighlight } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
-
+import { connect } from 'react-redux';
 import Weather from '../service/Weather'
 
-export default class FavoriteItem extends React.Component {
+
+
+const mapStateToProps = (state) => (state)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: (action) => { dispatch(action) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(class FavoriteItem extends React.Component {
   prototype = {
     name: PropTypes.string.isRequired,
     onRemove: PropTypes.func.isRequired,
     th: PropTypes.instanceOf.isRequired
   }
 
-  service = new Weather();
   state = { data: null };
   componentDidMount() {
-    this.service.getWeather(this.props.name).then((response) => {
-      this.setState({ data: response.data })
-    })
+    if(this.props.WeatherService == null){ this.props.dispatch({ type: "ADD_WeatherService", value: new Weather() }) }
+    else{this.props.WeatherService.getWeather(this.props.name).then((response) => {this.setState({ data: response.data })})}
+  }
+  componentDidUpdate(){
+    this.props.WeatherService.getWeather(this.props.name).then((response) => {this.setState({ data: response.data })})
   }
 
 
@@ -34,4 +44,4 @@ export default class FavoriteItem extends React.Component {
       </Swipeout>
     );
   }
-};
+})
