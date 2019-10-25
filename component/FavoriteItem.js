@@ -17,7 +17,6 @@ export default class FavoriteItem extends React.Component {
   state = { data: null };
   componentDidMount() {
     this.service.getWeather(this.props.name).then((response) => {
-      console.log(response.data)
       this.setState({ data: response.data })
     })
   }

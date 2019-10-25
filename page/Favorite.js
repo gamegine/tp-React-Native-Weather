@@ -18,7 +18,6 @@ export default class Favorite extends React.Component {
   refreshData() {
     console.log('fav refresh data');
     AsyncStorage.getItem('city').then(data => {
-      console.log(data)
       if (!data) data = '[]'
       this.setState({ city: JSON.parse(data) })
     })
@@ -43,7 +42,11 @@ export default class Favorite extends React.Component {
       <View>
         <NavigationEvents onDidFocus={payload => this.refreshData()} />
         {this.state.city.length != 0 ? (
-          <FlatList data={this.state.city} renderItem={({ item }) => <FavoriteItem onRemove={this.onRemove} name={item} navigation={this.props.navigation} th={this}/>} />
+          <FlatList 
+          keyExtractor={item => item}
+          data={this.state.city} 
+          renderItem={({ item }) => <FavoriteItem onRemove={this.onRemove} name={item} navigation={this.props.navigation} th={this}/>} 
+          />
         ) : (
             <Text>no favorites</Text>
           )}
