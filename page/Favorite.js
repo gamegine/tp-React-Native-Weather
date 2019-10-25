@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, FlatList, TouchableHighlight, AsyncStorage } from 'react-native';
+import { Text, View, FlatList, AsyncStorage } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Swipeout from 'react-native-swipeout';
+import FavoriteItem from '../component/FavoriteItem';
 
 export default class Favorite extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -24,7 +24,7 @@ export default class Favorite extends React.Component {
     })
   }
 
-  onRemove(el) {
+  onRemove(el,th) {
     console.log('Remove : ', el)
     AsyncStorage.getItem('city').then(data => {
       city = []
@@ -32,7 +32,7 @@ export default class Favorite extends React.Component {
       for (var i = 0; i < city.length; i++) {
         if (city[i] == el) { city.splice(i, 1); i--; }
       }
-      AsyncStorage.setItem('city', JSON.stringify(city)).then(() => this.setState({ city: city }))
+      AsyncStorage.setItem('city', JSON.stringify(city)).then(() => th.setState({ city: city }))
     }
     )
   }
@@ -43,20 +43,11 @@ export default class Favorite extends React.Component {
       <View>
         <NavigationEvents onDidFocus={payload => this.refreshData()} />
         {this.state.city.length != 0 ? (
-          <FlatList data={this.state.city} renderItem={({ item }) => this.Item(item)} />
+          <FlatList data={this.state.city} renderItem={({ item }) => <FavoriteItem onRemove={this.onRemove} name={item} navigation={this.props.navigation} th={this}/>} />
         ) : (
             <Text>no favorites</Text>
           )}
       </View>
-    );
-  }
-  Item(title) {
-    return (
-      <Swipeout right={[{ text: 'Remove', backgroundColor: 'red', onPress: () => { this.onRemove(title) } }]}>
-        <TouchableHighlight onPress={() => this.props.navigation.push('DetailFavorite',{"city":title})}>
-          <Text style={{ fontSize: 23 }}>{title}</Text>
-        </TouchableHighlight>
-      </Swipeout>
     );
   }
 };
