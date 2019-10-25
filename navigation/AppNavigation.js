@@ -42,4 +42,8 @@ export default createAppContainer(createMaterialBottomTabNavigator({
       tabBarIcon: ({tintColor})=>(<Icon style={tintColor} size={25} name={'md-information-circle-outline'}></Icon>)
     }
   }
+},
+{
+  initialRouteName: 'Home',
+  barStyle: { backgroundColor: '#0039e6' },
 }));
