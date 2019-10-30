@@ -1,14 +1,10 @@
-const initialState = { WeatherService: null }
+import WeatherServiceClass from '../../service/Weather'
+
+const initialState = { WeatherService: new WeatherServiceClass() }
 
 export default function WeatherService(state = initialState, action) {
     let nextState
     switch (action.type) {
-        case 'ADD_WeatherService':
-                nextState = {
-                    ...state,
-                    WeatherService: action.value
-                }
-            return nextState || state
         default:
             return state
     }

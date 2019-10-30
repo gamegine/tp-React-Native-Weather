@@ -4,7 +4,6 @@ import Swipeout from 'react-native-swipeout';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { connect } from 'react-redux';
-import Weather from '../service/Weather'
 
 
 
@@ -24,10 +23,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(class FavoriteItem e
 
   state = { data: null };
   componentDidMount() {
-    if(this.props.WeatherService == null){ this.props.dispatch({ type: "ADD_WeatherService", value: new Weather() }) }
-    else{this.props.WeatherService.getWeather(this.props.name).then((response) => {this.setState({ data: response.data })})}
-  }
-  componentDidUpdate(){
     this.props.WeatherService.getWeather(this.props.name).then((response) => {this.setState({ data: response.data })})
   }
 

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from '../component/Loading';
 import { connect } from 'react-redux';
-import Weather from '../service/Weather';
 
 
 const mapStateToProps = (state) => (state)
@@ -16,12 +15,8 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(class WeatherComp extends React.Component {
   state = { data: null };
   componentDidMount() {
-    if(this.props.WeatherService == null){ this.props.dispatch({ type: "ADD_WeatherService", value: new Weather() }) }
-    else { this.props.WeatherService.getWeather(this.props.city).then((response) => this.setState({ data: response.data })) }
+    this.props.WeatherService.getWeather(this.props.city).then((response) => this.setState({ data: response.data }))
   }
-
-  componentDidUpdate()
-  { if(this.state.data==null){this.props.WeatherService.getWeather(this.props.city).then((response) => this.setState({ data: response.data })) }}
 
   render() {
     return (
