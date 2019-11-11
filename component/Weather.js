@@ -15,7 +15,8 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(class WeatherComp extends React.Component {
   state = { data: null };
   componentDidMount() {
-    this.props.WeatherService.getWeather(this.props.city).then((response) => this.setState({ data: response.data }))
+    if(this.props.geoLoc!=null){this.props.WeatherService.getGeoLocWeather(this.props.geoLoc).then((response) => this.setState({ data: response.data }))}
+    else if(this.props.city!=null){this.props.WeatherService.getWeather(this.props.city).then((response) => this.setState({ data: response.data }))}
   }
 
   render() {
