@@ -30,7 +30,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(class FavoriteItem e
   render() {
     return (
       <Swipeout right={[{ text: 'Remove', backgroundColor: 'red', onPress: () => { this.props.onRemove(this.props.name, this.props.th) } }]}>
-        <TouchableHighlight onPress={() => this.props.navigation.push('DetailFavorite', { "city": this.props.name })}>
+        <TouchableHighlight onPress={() => this.props.navigation.push('DetailFavorite', { "city": this.props.name,data:this.state.data })}>
           <View>
             <Text style={{ fontSize: 23 }}>{this.props.name}</Text>
             {this.state.data != null ? <Text style={{textAlign:"center"}}>temp: {this.state.data.main.temp}°</Text> : <Loading />}
